@@ -1,0 +1,62 @@
+/*§
+  ===========================================================================
+  KnapScal - Core
+  ===========================================================================
+  Copyright (C) 2015 Gianluca Costa
+  ===========================================================================
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  ===========================================================================
+*/
+
+package info.gianlucacosta.knapscal.knapsack.dynamic.full
+
+import info.gianlucacosta.knapscal.knapsack.Item
+
+case class Solution private[full](iterations: Seq[Iteration], items: Seq[Item], value: Int) {
+  override def toString(): String = {
+    val result = new StringBuilder()
+
+    result.append("Items: ")
+    result.append(items)
+    result.append("\n\n")
+
+    result.append("Value: ")
+    result.append(value)
+    result.append("\n\n\n")
+
+    result.append("==== ITERATIONS ===\n")
+    result.append("\n\n")
+
+
+    iterations.zipWithIndex.foreach {
+      case (iteration, index) => {
+        result.append(s"* Iteration ${index} *\n\n")
+        result.append(s"M${index} = {\n\t${iteration.activeStates.mkString(",\n\t")}\n}\n\n")
+
+        result.append(s"Dominated states = ")
+
+        if (iteration.dominatedStates.isEmpty) {
+          result.append("{}")
+        } else {
+          result.append(s"{\n\t${iteration.dominatedStates.mkString(",\n\t")}\n}")
+        }
+        result.append("\n\n")
+
+
+        result.append("\n\n")
+      }
+    }
+
+    return result.toString()
+  }
+}
