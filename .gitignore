@@ -1,4 +1,5 @@
-.gradle/**
-.idea/**
-build/**
-*.iml
+/.gradle/**
+/.idea/**
+/build/**
+/*.iml
+/src/main/scala/info/gianlucacosta/knapscal/knapscal_core/ArtifactInfo.scala

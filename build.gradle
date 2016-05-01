@@ -32,25 +32,31 @@ buildscript {
     }
 
     dependencies {
-        classpath 'info.gianlucacosta.moonlicense:moonlicense-gradle:3.1'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.1'
-        classpath 'info.gianlucacosta.aurora:aurora:2.1'
-        classpath 'com.github.maiflai:gradle-scalatest:0.7'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.6'
+        classpath 'com.github.maiflai:gradle-scalatest:0.11'
+
+        classpath 'info.gianlucacosta.moonlicense:moonlicense-gradle:4.0'
+        classpath 'info.gianlucacosta.aurora:aurora:3.0'
     }
 }
 
 
 apply plugin: 'scala'
-apply plugin: 'info.gianlucacosta.aurora'
+apply plugin: 'maven'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'osgi'
 apply plugin: 'com.github.maiflai.scalatest'
+apply plugin: 'info.gianlucacosta.moonlicense'
+apply plugin: 'info.gianlucacosta.aurora'
 
 
 group = 'info.gianlucacosta.knapscal'
 archivesBaseName = 'knapscal-core'
-version = '1.0'
+version = '1.1'
 
 description = 'Scala library for the Knapsack problem'
 
+ext.facebookPage = 'https://www.facebook.com/pages/KnapScal/384118128442058'
 
 dependencies {
     compile 'org.scala-lang:scala-library:2.11.6'
@@ -62,7 +68,6 @@ dependencies {
 
 
 aurora {
-    docTask = 'scaladoc'
     gitHubUser = 'giancosta86'
 
     author {
@@ -73,8 +78,6 @@ aurora {
 
 
     bintray {
-        user = project.bintrayUser
-        key = project.bintrayKey
         repo = 'Hephaestus'
         licenses = ['Apache-2.0']
         labels = ['Knapsack', 'Scala', 'Java', 'library', 'branch & bound', 'dynamic programming', 'optimization']
